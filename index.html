@@ -22,8 +22,8 @@
         background-color: rgba(255, 255, 255, 0.8);
         background-size: cover;
         background-position: center;
-        width: 500px; /* Fixed width */
-        height: 400px; /* Fixed height */
+        width: 100vw; /*500px; /* Fixed width */
+        height: 100vh; /*400px; /* Fixed height */
         padding: 30px;
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -31,8 +31,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 80%;
-        max-width: 500px;
+        max-width: 100%; /* Ensure it doesn't overflow horizontally */
+        max-height: 100%; /* Ensure it doesn't overflow vertically */
     }
     .btn {
         font-size: 16px;
@@ -66,7 +66,7 @@
 </head>
 <!-----------------------CONTENT DISPLAYED in the browser------------------->
 <body>
-    <div id="container" style="background-image: url('open_stage.png');"> 
+    <div id="container" style="background-image: url('ignore_me/open_stage.png');"> 
         <!-- Page 1: Interactive Yes/No Buttons -->
         <div id="page1">
             <h1>Do you want your surprise gift?</h1>
