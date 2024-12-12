@@ -7,6 +7,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Gift Card</title>
+  <!-- Link to your external CSS file -->
+  <link rel="stylesheet" href="cake.css"> 
+  <link rel="stylesheet" href="page2.css"> 
+</head>
   <style>
     body {
         margin: 0;
@@ -30,9 +34,10 @@
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        max-width: 100%; /* Ensure it doesn't overflow horizontally */
-        max-height: 100%; /* Ensure it doesn't overflow vertically */
+        justify-content: flex-start; /* Align content to the top. OR: center; */
+        width: 80%; /* Ensure it doesn't overflow horizontally */
+        max-width: 500px; /* Ensure it doesn't overflow vertically */
+        max-height: 400px;
     }
     .btn {
         font-size: 16px;
@@ -66,30 +71,78 @@
 </head>
 <!-----------------------CONTENT DISPLAYED in the browser------------------->
 <body>
-    <div id="container" style="background-image: url('ignore_me/open_stage.png');"> 
-        <!-- Page 1: Interactive Yes/No Buttons -->
-        <div id="page1">
-            <h1>Do you want your surprise gift?</h1>
-            <button class="btn btn-yes" id="yesButton" onclick="showPage2()">Yes</button>
+    <div id="container" style="position: relative;"> 
+        <img id="heartsImage" src="./ignore_me/hearts.gif" style="display: none; position: absolute; bottom: 0; right: 0;">
+        <!-- Page 1: Cake -->
+        <div id="page1" style="display: none;">
+            <h1>How old are you again?</h1>
+            
+            <!-- Age input -->
+            <input type="number" id="ageInput" placeholder="Enter your age" />
+            <button class="btn btn-submit" id="submitButton" onclick="submitAge()">Submit</button>
+
+            <!-- Birthday Cake -->
+            <div class="cake">
+                <div class="plate"></div>
+                <div class="layer layer-bottom"></div>
+                <div class="layer layer-middle"></div>
+                <div class="layer layer-top"></div>
+                <div class="icing"></div>
+                <div class="drip drip1"></div>
+                <div class="drip drip2"></div>
+                <div class="drip drip3"></div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Page 2: Interactive Yes/No Buttons -->
+        <div id="page2">
+            <div class="card">
+                <img src="./ignore_me/celebrate.gif" alt="Gift Box" class="decor">
+                <h1>Happy Birthday Bea!</h1>
+                <button class="btn btn-yes" id="yesButton" onclick="showPage3()">Go to the gift</button>
+            </div>
+        </div>
+        <!-- Page 3: Interactive Yes/No Buttons for Musical?-->
+        <div id="page3" style="display: none;">
+            <h1>Would you like<br>to see a musical<br>with me?</h1>
+            <button class="btn btn-yes" id="yesButton" onclick="showPage4()">Yes</button>
             <button class="btn btn-no" id="noButton">No</button>
         </div>
-        <!-- Page 2: Gift Selection -->
-        <div id="page2" style="display: none;">
-            <h1>Choose Your Gift</h1>
+        <!-- Page 4: Interactive Yes/No Buttons for Ausflug?-->
+        <div id="page4" style="display: none;">
+            <h1>...plus Ausflug?</h1>
+            <img id="uk" src="./ignore_me/uk_fixed.png" class="decor" style="display: none; position: absolute; left: 320px; top: 120px; transform: scale(0.7);">
+            <button class="btn btn-yes" id="yesButton4" onclick="showPage5()">Yes</button>
+            <button class="btn btn-no" id="noButton4">No</button>
+        </div>
+        <!-- Page 5: Musical Selection -->
+        <div id="page5" style="display: none;">
+            <h1> <br> </h1>
+            <h1>My proposals...</h1>
+            <p>
+                (...I have a shitty memory and<br>don't remember which ones<br>you have seen already) 
+            </p>
             <div class="options">
                 <img src="./ignore_me/H.jpeg" alt="Musical 1" onclick="chooseGift('Musical 1')">
                 <img src="./ignore_me/LM.jpg" alt="Musical 2" onclick="chooseGift('Musical 2')">
                 <img src="./ignore_me/MR.jpg" alt="Musical 3" onclick="chooseGift('Musical 3')">
             </div>
+            <h1>Choose one!</h1>
         </div>
     </div>
 
     <script>
         const noButton = document.getElementById('noButton');
-        //const yesButton = document.querySelector('.btn-yes');
+        const noButton4 = document.getElementById('noButton4');
         const yesButton = document.getElementById('yesButton');
+        const yesButton4 = document.getElementById('yesButton4');
         const page1 = document.getElementById('page1');
         const page2 = document.getElementById('page2');
+        const page3 = document.getElementById('page3');
+        const page4 = document.getElementById('page4');
+        const page5 = document.getElementById('page5');
         const container = document.getElementById('container');
         const fullUrl = window.location.href
         const folderPath = fullUrl.substring(0, fullUrl.lastIndexOf('/') + 1);
@@ -97,23 +150,78 @@
 
         // Move "No" button and grow "Yes" button
         noButton.addEventListener('mouseover', () => {
-            // Generate random positions
-            const randomX = Math.random() * 80 + 10; // Limits to not escape the page
-            const randomY = Math.random() * 80 + 10; // Limits to not escape the page
+            if (page3.style.display === 'block') { // Check if page 4 is currently displayed
+                // Generate random positions
+                const randomX = Math.random() * 80 + 10; // Limits to not escape the page
+                const randomY = Math.random() * 80 + 10; // Limits to not escape the page
 
-            noButton.style.position = 'absolute';
-            noButton.style.left = randomX + '%';
-            noButton.style.top = randomY + '%';
-
-            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = (currentSize + 4) + 'px'; // Increment font size by 2px
-            yesButton.style.padding = (currentSize * 0.5) + 'px ' + (currentSize * 1.1) + 'px';
+                noButton.style.position = 'absolute';
+                noButton.style.left = randomX + '%';
+                noButton.style.top = randomY + '%';
+            }
         });
 
-        function showPage2() {
-            page1.style.display = 'none'; 
-            page2.style.display = 'block';
-            container.style.backgroundImage = "url('./ignore_me/background2.jpg')";
+        const noButton4Messages = ["Are you sure?", "Really sure?", "Give it another thought", "Still no?", "This could be a mistake", "Final answer?", "You are breaking my heart", "Pleeeeease"];
+        let messageIndex = 0;
+        noButton4.addEventListener('click', () => {
+            if (page4.style.display === 'block') { // Check if page 4 is currently displayed
+                noButton4.textContent = noButton4Messages[messageIndex]; // Change the text of the No button
+                messageIndex = (messageIndex + 1) % noButton4Messages.length; // Wrap around to the start
+                const currentSize = parseFloat(window.getComputedStyle(yesButton4).fontSize);
+                yesButton4.style.fontSize = (currentSize + 4) + 'px'; // Increase font size of the Yes button
+                yesButton4.style.padding = (currentSize * 0.5) + 'px ' + (currentSize * 1.1) + 'px';
+            }0
+            // Add picture
+            document.getElementById('uk').style.display = 'none';
+            container.style.backgroundImage = "url('./ignore_me/please.gif')";
+            //container.style.backgroundSize = "100% 75%" //"contain"; 
+            //container.style.backgroundRepeat = "no-repeat";
+            //container.style.backgroundPosition = "center";
+            container.style.justifyContent = "flex-start";
+        });
+
+        function submitAge() {
+            var age = document.getElementById("ageInput").value;
+            if (age == 35) {
+                showPage5()
+            } else {
+                alert("You wish! Be honest");
+            }
+        }
+
+        function showPage3() {
+            page1.style.display = 'none';
+            page2.style.display = 'none';
+            page3.style.display = 'block';
+            page4.style.display = 'none';  
+            page5.style.display = 'none';
+            container.style.backgroundColor = "#ffe4e1";
+            container.style.backgroundImage = "url('./ignore_me/closed_stage.png')";
+            container.style.justifyContent = "center";
+        }
+
+        function showPage4() {
+            page1.style.display = 'none';
+            page2.style.display = 'none';
+            page3.style.display = 'none'; 
+            page4.style.display = 'block'; 
+            page5.style.display = 'none';
+            container.style.backgroundColor = "#ffe4e1";
+            container.style.backgroundImage = "url('./ignore_me/closed_stage.png')";
+            document.getElementById('uk').style.display = 'block';
+            container.style.justifyContent = "center";
+        }
+
+        function showPage5() {
+            page1.style.display = 'none';
+            page2.style.display = 'none';
+            page3.style.display = 'none';
+            page4.style.display = 'none'; 
+            page5.style.display = 'block';
+            container.style.backgroundColor = "#ffe4e1";
+            container.style.backgroundImage = "url('./ignore_me/open_stage.png')";
+            document.getElementById('uk').style.display = 'none';
+            document.getElementById('heartsImage').style.display = 'block';
         }
 
         // Choose a musical
