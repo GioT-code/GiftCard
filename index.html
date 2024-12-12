@@ -18,8 +18,9 @@
     }
     #container {
         background-color: rgba(255, 255, 255, 0.8);
-        background-size: cover;
-        background-position: center;
+        background-size: cover; /* By default, use cover for larger screens */
+        background-position: center; /* Center the background */
+        background-repeat: no-repeat; /* Ensure no repeating of background */
         width: 100vw;
         height: 100vh;
         padding: 30px;
@@ -29,9 +30,10 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        width: 80%; /* Ensure it doesn't overflow horizontally */
-        max-width: 500px; /* Ensure it doesn't overflow vertically */
+        width: 80%;
+        max-width: 500px;
         max-height: 400px;
+        position: relative;
     }
 
     .btn {
@@ -127,9 +129,29 @@
     /* Media query to adjust background for screens smaller than 768px (mobile devices) */
     @media screen and (max-width: 768px) {
         #container {
-            background-size: contain; /* Make sure the background fits the screen */
-            background-position: center; /* Center the background */
+            background-size: contain; /* Scale down the background */
+            background-position: center; /* Keep it centered */
+            background-repeat: no-repeat; /* Avoid repeating the background */
         }
+
+        /* Optionally, scale down uk.png for mobile */
+        #uk {
+            width: 50%; /* Adjust as needed */
+            height: auto; /* Maintain aspect ratio */
+            position: relative;
+            top: 10px; /* Adjust position as needed */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center horizontally using translate */
+        }
+    }
+
+    #uk {
+        max-width: 100%;
+        height: auto;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translateX(-50%);
     }
   </style>
 </head>
