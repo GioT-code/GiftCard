@@ -123,6 +123,14 @@
             font-size: 16px;
         }
     }
+
+    /* Media query to adjust background for screens smaller than 768px (mobile devices) */
+    @media screen and (max-width: 768px) {
+        #container {
+            background-size: contain; /* Make sure the background fits the screen */
+            background-position: center; /* Center the background */
+        }
+    }
   </style>
 </head>
 
