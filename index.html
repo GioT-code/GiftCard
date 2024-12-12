@@ -9,7 +9,7 @@
   <title>Interactive Gift Card</title>
   <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="cake.css"> 
-  <link rel="stylesheet" href="page2.css"> 
+  <!-- <link rel="stylesheet" href="page2.css"> -->
 </head>
   <style>
     body {
@@ -48,12 +48,14 @@
         cursor: pointer;
         color: white;
         background-color: #28a745;
+        opacity: 0.9;
     }
     .btn-no {
         background-color: #dc3545;
     }
     .btn:hover {
-        opacity: 0.9;
+        opacity: 120%;
+        border: 3px solid rgb(251, 255, 0);
     }
     .options img {
         width: 100px;
@@ -67,12 +69,42 @@
         transform: scale(1.1);
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
+    #page2, #page4b {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; /* Full viewport height */
+        background-color: #ffe4e1;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card h1 {
+        color: #ff6f61;
+    }
+
+    .card p {
+        font-size: 18px;
+        color: #555;
+    }
+
+    .decor {
+        width: 200px;
+        height: auto; /* Maintain aspect ratio */
+        margin: 20px auto;
+    }
+    #heartGif {
+        display: block;
+        margin: 50px auto 0; /* Adjusts spacing from the top and centers horizontally */
+        max-width: 300px; /* Ensures the GIF is responsive */
+        position: relative; /* Keeps it within the container */
+    }
   </style>
 </head>
 <!-----------------------CONTENT DISPLAYED in the browser------------------->
 <body>
     <div id="container" style="position: relative;"> 
-        <img id="heartsImage" src="./ignore_me/hearts.gif" style="display: none; position: absolute; bottom: 0; right: 0;">
+        <!-- <img id="heartsImage" src="./ignore_me/hearts.gif" style="display: none; position: absolute; bottom: 0; right: 0;"> -->
         <!-- Page 1: Cake -->
         <div id="page1" style="display: none;">
             <h1>How old are you again?</h1>
@@ -99,7 +131,7 @@
         <!-- Page 2: Interactive Yes/No Buttons -->
         <div id="page2">
             <div class="card">
-                <img src="./ignore_me/celebrate.gif" alt="Gift Box" class="decor">
+                <img src="./ignore_me/celebrate.gif" class="decor">
                 <h1>Happy Birthday Bea!</h1>
                 <button class="btn btn-yes" id="yesButton" onclick="showPage3()">Go to the gift</button>
             </div>
@@ -113,23 +145,35 @@
         <!-- Page 4: Interactive Yes/No Buttons for Ausflug?-->
         <div id="page4" style="display: none;">
             <h1>...plus Ausflug?</h1>
-            <img id="uk" src="./ignore_me/uk_fixed.png" class="decor" style="display: none; position: absolute; left: 320px; top: 120px; transform: scale(0.7);">
-            <button class="btn btn-yes" id="yesButton4" onclick="showPage5()">Yes</button>
+            <img id="uk" src="./ignore_me/uk_fixed.png" class="decor" style="display: none; position: absolute; left: 340px; top: 120px; transform: scale(0.7);">
+            <button class="btn btn-yes" id="yesButton4" onclick="showPage4b()">Yes</button>
             <button class="btn btn-no" id="noButton4">No</button>
+        </div>
+        <!-- Page 4b: Interactive Yes/No Buttons for Ausflug?-->
+        <div id="page4b" style="display: none;">
+            <div class="card">
+                <h1> <br> </h1>
+                <h1>ooooh NICE!</h1>
+                <img id="heartGif" src="./ignore_me/heart.gif" class="decor">
+            </div>
         </div>
         <!-- Page 5: Musical Selection -->
         <div id="page5" style="display: none;">
             <h1> <br> </h1>
             <h1>My proposals...</h1>
             <p>
-                (...I have a shitty memory and<br>don't remember which ones<br>you have seen already) 
+                (I have a shitty memory and<br>don't remember which ones<br>you have seen already) 
             </p>
             <div class="options">
-                <img src="./ignore_me/H.jpeg" alt="Musical 1" onclick="chooseGift('Musical 1')">
-                <img src="./ignore_me/LM.jpg" alt="Musical 2" onclick="chooseGift('Musical 2')">
-                <img src="./ignore_me/MR.jpg" alt="Musical 3" onclick="chooseGift('Musical 3')">
+                <img src="./ignore_me/LM.jpg" onclick="chooseMusical('Les Miserables')">
+                <img src="./ignore_me/H.jpeg" onclick="chooseMusical('Hercules')">
+                <img src="./ignore_me/MR.jpg" onclick="chooseMusical('Moulin Rouge')">
             </div>
             <h1>Choose one!</h1>
+        </div>
+        <!-- Page 6: Interactive Yes/No Buttons for Ausflug?-->
+        <div id="page6" style="display: none;">
+            <h1>That's all</h1>
         </div>
     </div>
 
@@ -142,7 +186,9 @@
         const page2 = document.getElementById('page2');
         const page3 = document.getElementById('page3');
         const page4 = document.getElementById('page4');
+        const page4b = document.getElementById('page4b');
         const page5 = document.getElementById('page5');
+        const page6 = document.getElementById('page6');
         const container = document.getElementById('container');
         const fullUrl = window.location.href
         const folderPath = fullUrl.substring(0, fullUrl.lastIndexOf('/') + 1);
@@ -194,8 +240,10 @@
             page2.style.display = 'none';
             page3.style.display = 'block';
             page4.style.display = 'none';  
+            page4b.style.display = 'none'; 
             page5.style.display = 'none';
-            container.style.backgroundColor = "#ffe4e1";
+            page6.style.display = 'none';
+
             container.style.backgroundImage = "url('./ignore_me/closed_stage.png')";
             container.style.justifyContent = "center";
         }
@@ -205,11 +253,35 @@
             page2.style.display = 'none';
             page3.style.display = 'none'; 
             page4.style.display = 'block'; 
+            page4b.style.display = 'none'; 
             page5.style.display = 'none';
-            container.style.backgroundColor = "#ffe4e1";
+            page6.style.display = 'none';
+
             container.style.backgroundImage = "url('./ignore_me/closed_stage.png')";
             document.getElementById('uk').style.display = 'block';
             container.style.justifyContent = "center";
+        }
+
+        function showPage4b() {
+            page1.style.display = 'none';
+            page2.style.display = 'none';
+            page3.style.display = 'none'; 
+            page4.style.display = 'none';
+            page4b.style.display = 'block';
+            page5.style.display = 'none';
+            page6.style.display = 'none';
+            
+            container.style.backgroundImage = "none"
+            //container.style.backgroundColor = "#ffe4e1";
+
+            const heartGif = document.getElementById('heartGif');
+            heartGif.src = './ignore_me/heart.gif?' + new Date().getTime();
+
+            // Hide page4b after 3 seconds and proceed to the next page
+            setTimeout(() => {
+                page4b.style.display = 'none';
+                showPage5();
+            }, 3000); // 3 seconds
         }
 
         function showPage5() {
@@ -217,9 +289,13 @@
             page2.style.display = 'none';
             page3.style.display = 'none';
             page4.style.display = 'none'; 
+            page4b.style.display = 'none'; 
             page5.style.display = 'block';
-            container.style.backgroundColor = "#ffe4e1";
+            page6.style.display = 'none';
+            
             container.style.backgroundImage = "url('./ignore_me/open_stage.png')";
+            container.style.backgroundColor = "#f0f0f0";
+
             document.getElementById('uk').style.display = 'none';
             document.getElementById('heartsImage').style.display = 'block';
         }
@@ -230,8 +306,38 @@
             // window.location.href = `mailto:giotos90@gmail.com?subject=Bea's Gift&body=Bea chose ${gift}, so send send her the right Gutschein!`;
             
             // Open Telegram and show predefined message
-            message = `I chose ${gift}, so bitte send me the right Gutschein! :)`
-            window.location.href = `tg://msg?text=${message}`;
+            // message = `I chose ${gift}, so bitte send me the right Gutschein! :)`
+            // window.location.href = `tg://msg?text=${message}`;
+
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isMobile = /iphone|ipod|android|windows phone|blackberry|iemobile|mobile|opera mini/i.test(userAgent);
+            if (isMobile) {
+                // If it's a mobile device, try to open Telegram
+                const message = `I chose ${gift}, so please send me the right Gutschein! :)`;
+                window.location.href = `tg://msg?text=${message}`;
+            } else {
+                // If it's not a mobile device, show a message indicating Telegram can't be opened
+                alert('It looks like you are on a desktop. Please take your phone and send me a message to let me know your choice :)');
+
+                showPage6();
+            }
+        }
+
+        function showPage6() {
+            page1.style.display = 'none';
+            page2.style.display = 'none';
+            page3.style.display = 'none'; 
+            page4.style.display = 'none';
+            page4b.style.display = 'none'; 
+            page5.style.display = 'none';
+            page6.style.display = 'block';
+
+            container.style.backgroundImage = "url('./ignore_me/cleaning.gif')";
+            container.style.backgroundSize = "contain"; 
+            container.style.backgroundRepeat = "no-repeat";
+            container.style.backgroundPosition = "center";
+            container.style.justifyContent = 'flex-start';
+
         }
     </script>
 </body>
