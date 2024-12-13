@@ -314,7 +314,8 @@
                 alert('I open Telegram for you so that you can let me know your choice :)');
                 // If it's a mobile device, try to open Telegram
                 const message = `I chose ${gift}, so please send me the right Gutschein! :)`;
-                window.location.href = `tg://msg?text=${message}`, '_blank'; // Opens Telegram in a new tab or window
+                //window.location.href = `tg://msg?text=${message}`; 
+                window.open(`tg://msg?text=${message}`, '_blank'); // Opens Telegram in a new tab or window
 
                 setTimeout(() => {
                     showPage6();
