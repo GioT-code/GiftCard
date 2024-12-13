@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
+<html>
+<!------------------------METADATA (not displayed)-------------------------->
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gift Card for Bea</title>
+  <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="cake.css"> 
+</head>
   <style>
     body {
         margin: 0;
@@ -18,21 +23,21 @@
     }
     #container {
         background-color: rgba(255, 255, 255, 0.8);
-        background-size: cover;  /* Cover the entire container with the background */
+        background-size: cover;
         background-position: center;
-        padding: 20px;
+        width: 100vw; /*500px; /* Fixed width */
+        height: 100vh; /*400px; /* Fixed height */
+        padding: 30px;
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;  /* Center everything inside */
-        width: 80%;           /* Ensure it doesn't overflow horizontally */
-        max-width: 500px;
+        justify-content: flex-start; /* Align content to the top. OR: center; */
+        width: 80%; /* Ensure it doesn't overflow horizontally */
+        max-width: 500px; /* Ensure it doesn't overflow vertically */
         max-height: 400px;
     }
-
     .btn {
         font-size: 16px;
         padding: 10px 20px;
@@ -44,31 +49,25 @@
         background-color: #28a745;
         opacity: 0.9;
     }
-
     .btn-no {
         background-color: #dc3545;
     }
-
     .btn:hover {
         opacity: 120%;
         border: 3px solid rgb(251, 255, 0);
     }
-
     .options img {
-        width: 30vw; /* Make the width based on the viewport width */
-        height: auto; /* Maintain aspect ratio */
-        max-width: 100px; /* Cap the max width */
+        width: 100px;
+        height: 100px;
         border-radius: 10px;
         cursor: pointer;
         margin: 10px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .options img:hover {
         transform: scale(1.1);
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
-
     #page2, #page4b {
         display: flex;
         justify-content: center;
@@ -90,52 +89,30 @@
 
     .decor {
         width: 200px;
-        height: auto;
+        height: auto; /* Maintain aspect ratio */
         margin: 20px auto;
     }
-
     #heartGif {
         display: block;
-        margin: 50px auto 0;
-        max-width: 300px;
-        position: relative;
+        margin: 50px auto 0; /* Adjusts spacing from the top and centers horizontally */
+        max-width: 300px; /* Ensures the GIF is responsive */
+        position: relative; /* Keeps it within the container */
     }
-
-    /* Mobile-specific styles */
-    @media screen and (max-width: 2400px) and (max-height: 1080px) {
-        #container {
-            width: 100%;       /* Use 100% of the available width */
-            height: 80vh;      /* 80% of the viewport height */
-            background-size: contain; /* Make sure the background fits within */
-            background-position: center;
-        }
-        #uk {
-            width: 40%;         /* Adjust image size for mobile */
-            height: auto;
-            position: absolute;
-            left: 50%;
-            top: 10%;
-            transform: translateX(-50%);
-        }
-    }
-    /* Regular desktop layout */
-    @media screen and (min-width: 2401px) {
-        #container {
-            width: 500px;      /* Fixed width for desktop */
-            height: 400px;     /* Fixed height for desktop */
-        }
-    }
-
   </style>
 </head>
-
+<!-----------------------CONTENT DISPLAYED in the browser------------------->
 <body>
     <div id="container" style="position: relative;"> 
+        <!-- <img id="heartsImage" src="./ignore_me/hearts.gif" style="display: none; position: absolute; bottom: 0; right: 0;"> -->
         <!-- Page 1: Cake -->
         <div id="page1" style="display: none;">
             <h1>How old are you again?</h1>
+            
+            <!-- Age input -->
             <input type="number" id="ageInput" placeholder="Enter your age" />
             <button class="btn btn-submit" id="submitButton" onclick="submitAge()">Submit</button>
+
+            <!-- Birthday Cake -->
             <div class="cake">
                 <div class="plate"></div>
                 <div class="layer layer-bottom"></div>
@@ -150,7 +127,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Page 2: Interactive Yes/No Buttons -->
         <div id="page2">
             <div class="card">
@@ -159,22 +135,19 @@
                 <button class="btn btn-yes" id="yesButton" onclick="showPage3()">Go to the gift</button>
             </div>
         </div>
-
         <!-- Page 3: Interactive Yes/No Buttons for Musical?-->
         <div id="page3" style="display: none;">
             <h1>Would you like<br>to see a musical<br>with me?</h1>
             <button class="btn btn-yes" id="yesButton" onclick="showPage4()">Yes</button>
             <button class="btn btn-no" id="noButton">No</button>
         </div>
-
         <!-- Page 4: Interactive Yes/No Buttons for Ausflug?-->
         <div id="page4" style="display: none;">
             <h1>...plus Ausflug?</h1>
-            <img id="uk" src="./ignore_me/uk_fixed.png" class="decor" style="display: none; position: absolute;">
+            <img id="uk" src="./ignore_me/uk_fixed.png" class="decor" style="display: none; position: absolute; left: 340px; top: 120px; transform: scale(0.7);">
             <button class="btn btn-yes" id="yesButton4" onclick="showPage4b()">Yes</button>
             <button class="btn btn-no" id="noButton4">No</button>
         </div>
-
         <!-- Page 4b: Interactive Yes/No Buttons for Ausflug?-->
         <div id="page4b" style="display: none;">
             <div class="card">
@@ -183,11 +156,13 @@
                 <img id="heartGif" src="./ignore_me/heart.gif" class="decor">
             </div>
         </div>
-
         <!-- Page 5: Musical Selection -->
         <div id="page5" style="display: none;">
+            <h1> <br> </h1>
             <h1>My proposals...</h1>
-            <p>(I have a shitty memory and<br>don't remember which ones<br>you have seen already)</p>
+            <p>
+                (I have a shitty memory and<br>don't remember which ones<br>you have seen already) 
+            </p>
             <div class="options">
                 <img src="./ignore_me/LM.jpg" onclick="chooseMusical('Les Miserables')">
                 <img src="./ignore_me/H.jpeg" onclick="chooseMusical('Hercules')">
@@ -195,8 +170,7 @@
             </div>
             <h1>Choose one!</h1>
         </div>
-
-        <!-- Page 6: Final Message -->
+        <!-- Page 6: Interactive Yes/No Buttons for Ausflug?-->
         <div id="page6" style="display: none;">
             <h1>That's all</h1>
         </div>
@@ -250,27 +224,6 @@
             //container.style.backgroundPosition = "center";
             container.style.justifyContent = "flex-start";
         });
-
-        function adjustForMobile() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            const isMobile = /iphone|ipod|android|windows phone|blackberry|iemobile|mobile|opera mini/i.test(userAgent);
-
-            // If the user is on a mobile device, scale the images or use different images
-            if (isMobile) {
-                // Change background image for mobile
-                document.getElementById('container').style.backgroundImage = "url('./ignore_me/mobile_background.jpg')";
-                // Optionally scale background images down
-                document.getElementById('container').style.backgroundSize = "cover"; // Use "contain" if needed for smaller devices
-                document.getElementById('container').style.backgroundPosition = "center";
-            } else {
-                // Default background for non-mobile users
-                document.getElementById('container').style.backgroundImage = "url('./ignore_me/desktop_background.jpg')";
-                document.getElementById('container').style.backgroundSize = "cover";
-            }
-        }
-
-        // Call the adjustForMobile function on page load
-        window.onload = adjustForMobile;
 
         function submitAge() {
             var age = document.getElementById("ageInput").value;
@@ -361,7 +314,13 @@
                 alert('I open Telegram for you so that you can let me know your choice :)');
                 // If it's a mobile device, try to open Telegram
                 const message = `I chose ${gift}, so please send me the right Gutschein! :)`;
-                window.location.href = `tg://msg?text=${message}`;
+                window.location.href = `tg://msg?text=${message}`, '_blank'; // Opens Telegram in a new tab or window
+
+                setTimeout(() => {
+                    page4b.style.display = 'none';
+                    showPage5();
+                }, 3000); // 3 seconds
+
             } else {
                 // If it's not a mobile device, show a message indicating Telegram can't be opened
                 alert('It looks like you are on a desktop. Please take your phone and send me a message to let me know your choice :)');
@@ -388,3 +347,4 @@
     </script>
 </body>
 </html>
+
