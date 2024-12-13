@@ -312,14 +312,13 @@
             const isMobile = /iphone|ipod|android|windows phone|blackberry|iemobile|mobile|opera mini/i.test(userAgent);
             if (isMobile) {
                 alert('I open Telegram for you so that you can let me know your choice :)');
-                // If it's a mobile device, try to open Telegram
+                setTimeout(() => {
+                    showPage6();
+                }, 5000); // 5 seconds
+                // Try to open Telegram
                 const message = `I chose ${gift}, so please send me the right Gutschein! :)`;
                 //window.location.href = `tg://msg?text=${message}`; 
                 window.open(`tg://msg?text=${message}`, '_blank'); // Opens Telegram in a new tab or window
-
-                setTimeout(() => {
-                    showPage6();
-                }, 3000); // 3 seconds
 
             } else {
                 // If it's not a mobile device, show a message indicating Telegram can't be opened
