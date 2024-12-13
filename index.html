@@ -143,8 +143,9 @@
         </div>
         <!-- Page 4: Interactive Yes/No Buttons for Ausflug?-->
         <div id="page4" style="display: none;">
+            <h1> <br> </h1>
             <h1>...plus Ausflug?</h1>
-            <img id="uk" src="./ignore_me/uk_fixed.png" class="decor" style="display: none; position: absolute; left: 340px; top: 120px; transform: scale(0.7);">
+            <img id="uk" src="./ignore_me/uk_minion.png" class="decor" style="display: none; position: absolute; left: 100px; top: 180px; transform: scale(1.5);">
             <button class="btn btn-yes" id="yesButton4" onclick="showPage4b()">Yes</button>
             <button class="btn btn-no" id="noButton4">No</button>
         </div>
@@ -258,7 +259,7 @@
 
             container.style.backgroundImage = "url('./ignore_me/closed_stage.png')";
             document.getElementById('uk').style.display = 'block';
-            container.style.justifyContent = "center";
+            container.style.justifyContent = 'flex-start'; //"center";
         }
 
         function showPage4b() {
@@ -311,14 +312,15 @@
             const userAgent = navigator.userAgent.toLowerCase();
             const isMobile = /iphone|ipod|android|windows phone|blackberry|iemobile|mobile|opera mini/i.test(userAgent);
             if (isMobile) {
-                alert('I open Telegram for you so that you can let me know your choice :)');
-                setTimeout(() => {
-                    showPage6();
-                }, 5000); // 5 seconds
-                // Try to open Telegram
+                alert('I open Telegram for you so that you can let me know your choice. Just click my name! :)');
+                // If it's a mobile device, try to open Telegram
                 const message = `I chose ${gift}, so please send me the right Gutschein! :)`;
                 //window.location.href = `tg://msg?text=${message}`; 
                 window.open(`tg://msg?text=${message}`, '_blank'); // Opens Telegram in a new tab or window
+
+                setTimeout(() => {
+                    showPage6();
+                }, 3000); // 3 seconds
 
             } else {
                 // If it's not a mobile device, show a message indicating Telegram can't be opened
